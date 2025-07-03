@@ -22,11 +22,12 @@ Users can shorten URLs, track analytics (click count), and manage URLs with user
 - Cookies & Session Auth
 
 ## 📷 Demo
+https://github.com/user-attachments/assets/ddfc83d8-084a-4d6f-bd1c-efaaa77a5d1c
 
 
 ## 🚀 Run Locally
 
 Clone the project:
-git clone https://github.com/your-username/url-shortener-app.git
-cd url-shortener-app
-npm install
+-git clone https://github.com/your-username/url-shortener-app.git
+-cd url-shortener-app
+-npm install
