@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../home.css">
+</head>
+<body>
+    <h1 class="header">Shortify</h1>
+
+    <% if(id) { %> 
+<p>
+    <p class="url">URL generated:</p>
+    <span id="shortUrl">http://localhost:3000/<%= id %></span>
+    <button onclick="copyToClipboard()">Copy</button>
+  </p>    <% } %>
+
+    <div>
+        <form action="/url" method="POST">
+            <label for="url">
+                Enter your Original URL : 
+            </label>
+            <input class="url-input" type="text" name="url" placeholder="https://example.com" required>
+            <button class="generate-button">Generate</button>
+        </form>
+    </div>
+
+    <div class="previous-urls">
+        <% if (urls && urls.length > 0) { %>
+            <h4>Previously Generated URLs and its Analytics :: </h4>
+            <table>
+                <thead>
+                    <th>S.No</th>
+                    <th>ShortID</th>
+                    <th>Redirect</th>
+                    <th>Clicks</th>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= url.shortId %></td>
+                            <td><%= url.redirectUrl %></td> <!-- Fix the property name -->
+                            <td><%= url.visitHistory.length %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No URLs yet.</p>
+        <% } %>
+    </div>
+
+    <form action="/clear" method="POST" onsubmit="return confirm('Are you sure you want to delete all URLs?');">
+  <button class="submit" type="submit" style="background-color: red; color: white;">Clear All</button>
+</form>
+
+<script>
+  function copyToClipboard() {
+    const shortUrlText = document.getElementById('shortUrl').innerText;
+
+    navigator.clipboard.writeText(shortUrlText).then(() => {
+      alert("Copied to clipboard: " + shortUrlText);
+    }).catch(err => {
+      console.error("Failed to copy: ", err);
+    });
+  }
+</script>
+
+</body>
+</html>
